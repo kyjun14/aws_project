@@ -1,0 +1,17 @@
+  1 ---
+  2 - name: print ipv4.address for nodes
+  3   hosts: nodes
+  4
+  5   tasks:
+  6     - name: debug by msg
+  7       debug:
+  8         msg:
+  9           - "eth0's ip {{ ansible_eth0.ipv4.address }}"
+ 10           - "eth1's ip {{ ansible_eth0.ipv4.address }}"
+ 11
+ 12     - name: debu by var
+ 13       debug:
+ 14         var: "{{ item }}"
+ 15       with_items:
+ 16         - hostvars[inventory_hostname]['ansible_eth0']['ipv4']['address']
+ 17         - hostvars[inventory_hostname]['ansible_eth1']['ipv4']['address']
